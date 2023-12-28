@@ -10,7 +10,7 @@ pipeline {
 	
 	stage('Build'){
 		steps{
-			bat "mvn clean install"
+			bat "mvn clean deploy"
 		}
 	}
 	
@@ -36,7 +36,7 @@ pipeline {
 		emailext(
 			subject: "Job Completed",
 			body: "Jenkins pipeline job for maven build job completed",
-			to: "sudheer.baraker@gmail.com"
+			to: "ashokhydra1998@outlook.com"
 		)
 		}
 	}
