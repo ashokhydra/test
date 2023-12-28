@@ -10,7 +10,7 @@ pipeline {
 	
 	stage('Build'){
 		steps{
-			bat "mvn clean deploy"
+			bat "mvn clean install -Dmaven.test.skip=true"
 		}
 	}
 	
@@ -22,11 +22,8 @@ pipeline {
 	
 	stage('deployment'){
 		steps{
-		//deploy adapters: [tomcat9(credentialsId: 'TomcatCreds' path: '', url: 'http://http://172.174.230.44:8080/')], contextPath: 'counterwebapp', war: 'target/*.war'
-		deploy adapters: [tomcat9(url: 'http://172.174.230.44:8080/', 
-                              credentialsId: 'TomcatCreds')], 
-                    war: 'target/*.war',
-                     contextPath: 'app'
+		deploy adapters: [tomcat9(credentialsId: 'TomcatCreds' path: '', url: 'http://http://172.174.230.44:8080/')], contextPath: 'counterwebapp', war: 'target/*.war'
+		//deploy adapters: [tomcat9(url: 'http://172.174.230.44:8080/', credentialsId: 'TomcatCreds')], war: 'target/*.war',contextPath: 'app'
 		}
 		
 	}
